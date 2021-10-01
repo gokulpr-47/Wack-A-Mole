@@ -4,6 +4,7 @@ const moles = document.querySelectorAll(".mole");
 let lastHole;
 let timeUp = false;
 let score = 0;
+let started = false
 
 function popTime(min,max){
     return(Math.round(Math.random() * (max - min) + min));
@@ -27,16 +28,21 @@ function pop(){
         hole.classList.remove('up');
         if(!timeUp){
             pop();
-        }
+        } else {
+			started = false
+		}
     }, time);
 }
 
 function startGame(){
+	if (!started) { 
+	started = true;
     scoreBoard.textContent = "Score:"+ 0;
     timeUp = false;
     pop();
     score = 0;
     setTimeout(() => timeUp = true, 15000);
+	}
 }
 
 function hit(e){
